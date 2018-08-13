@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:alpine
 RUN mkdir deploy
 COPY . /deploy
 WORKDIR "/deploy"
