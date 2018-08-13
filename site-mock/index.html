@@ -1,0 +1,241 @@
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" >
+    <title>Grille etudiant</title>
+    <link rel="stylesheet" type="text/css" href="/js/dojo-1.12.2/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" type="text/css" href="/js/dojo-1.12.2/dojo/resources/dojo.css">
+    <link rel="stylesheet" type="text/css" href="/js/dojo-1.12.2/dojox/grid/resources/tundraGrid.css">
+    <link rel="stylesheet" type="text/css" href="/applic/notes/contenu.css">
+    
+    <script type="text/javascript" src="/js/dojo-1.12.2/dojo/dojo.js" djConfig="isDebug:false, parseOnLoad: true"></script>
+    <script type="text/javascript" src="/js/prototype.js"></script>
+    
+    <script type="text/javascript">
+        dojo.require("dojo.data.ItemFileReadStore");
+        dojo.require("dojox.grid.DataGrid");
+        dojo.require("dijit.Tooltip");
+        dojo.require("dojo.parser");
+    </script>
+    
+    <style type="text/css">
+    body {	
+        padding: 0px 15px 15px 15px;
+    }
+    .tooltipTable {
+        border-color: #CCCCCC #666666 #666666 #CCCCCC;
+        border-style: solid;
+        border-width: 1px;
+        padding: 0px;
+        margin: 0px;
+        border-collapse: collapse;
+    }
+    .tooltipTable td {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #CCCCCC #666666 #666666 #CCCCCC;
+        text-align: center;
+        padding: 1px 4px 1px 4px;
+    }
+    
+    
+    </style>
+    
+    </head>
+    <body class="tundra">
+    
+    <script type="text/javascript">
+    var firstColNote = 3;
+    var nbColonneCompetence = 13;
+    var colTypeEval = 0;
+    var firstRangeeNote =  0;
+       
+        var nbColonneAp = 9;
+    var nbControle = 30;
+    var data = [{"controle":"\u00c9thique - Examen sommatif","ie":"I","tee":"157.9","0":157.95,"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"\u00c9thique - Pr\u00e9sentation orale","ie":"I","tee":"87.6","0":87.6,"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"\u00c9thique - Auto\u00e9valuation","ie":"I","tee":"51.6","0":51.6,"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"\u00c9thique - Travail maison","ie":"I","tee":"60.0","0":60,"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"\u00c9thique - Rapport #1","ie":"I","tee":"158.4","0":158.4,"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - Appr\u00e9ciation professorale","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"APP 1 - Rapport 1","ie":"I","tee":"58.0","0":"","1":"","2":"","3":"","4":"","5":58,"6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - Mini-test #1","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"APP 1 - Rapport 2","ie":"I","tee":"111.0","0":"","1":"","2":"","3":"","4":"","5":"","6":51,"7":60,"8":"","9":"","10":"","11":"","12":""},{"controle":"APP 1 - Examen sommatif","ie":"I","tee":"253.1","0":"","1":"","2":"","3":"","4":"","5":110,"6":70.79,"7":72.27,"8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - MAP","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - Rapport \u00e9tape 1","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"APP 2 - Rapport","ie":"I","tee":"116.4","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":116.4},{"controle":"APP 2 - Examen sommatif","ie":"I","tee":"184.8","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":184.8},{"controle":"APP 3 - Rapport","ie":"I","tee":"52.0","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":52,"10":"0.0","11":"","12":""},{"controle":"APP 3 - Examen sommatif","ie":"I","tee":"215.0","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":135,"10":80,"11":"","12":""},{"controle":"Projet - Rapport \u00e9tape 2","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"APP 4 - Rapport","ie":"I","tee":"74.5","0":"","1":36.5,"2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":38,"12":""},{"controle":"APP 4 - Examen sommatif","ie":"I","tee":"197.5","0":"","1":118,"2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":79.5,"12":""},{"controle":"APP 5 - Rapport","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"--","9":"","10":"","11":"","12":""},{"controle":"APP 5 - Validation","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"--","9":"","10":"","11":"","12":""},{"controle":"APP 5 - Examen sommatif","ie":"I","tee":"94.0","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":94,"9":"","10":"","11":"","12":""},{"controle":"Projet - Pr\u00e9sentation technique","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - Rapport final","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Projet - valuation par les pairs","ie":"I","tee":"--","0":"","1":"","2":"--","3":"--","4":"--","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Examen final GEN650","ie":"I","tee":"--","0":"","1":"--","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"Examen final GIF611+GIF620","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"--","6":"--","7":"--","8":"","9":"","10":"","11":"","12":""},{"controle":"Examen final GIF630","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"--","9":"","10":"","11":"","12":""},{"controle":"Examen final GIF650","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"--","10":"--","11":"","12":""},{"controle":"Examen final GIF655","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"--","12":""},{"controle":"Examen final GIF660","ie":"I","tee":"--","0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"--"},{"controle":" Total","ie":"","tee":"","0":515.55,"1":154.5,"2":0,"3":0,"4":0,"5":168,"6":121.79,"7":132.26999,"8":94,"9":187,"10":80,"11":117.5,"12":301.2,"13":515.55,"14":154.5,"15":0,"16":168,"17":254.06,"18":94,"19":267,"20":117.5,"21":301.2}];
+    var dataToolTip = [{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"157.9","ponderation":180,"moyenne":"135.6"},"0":{"note":157.95,"moyenne":"135.6","ecartType":"15.3","ponderation":180},"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"87.6","ponderation":120,"moyenne":"96.4"},"0":{"note":87.6,"moyenne":"96.4","ecartType":"10.9","ponderation":120},"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"51.6","ponderation":60,"moyenne":"50.4"},"0":{"note":51.6,"moyenne":"50.4","ecartType":"8.6","ponderation":60},"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"60.0","ponderation":60,"moyenne":"50.5"},"0":{"note":60,"moyenne":"50.5","ecartType":"10.5","ponderation":60},"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"158.4","ponderation":180,"moyenne":"149.7"},"0":{"note":158.4,"moyenne":"149.7","ecartType":"13.2","ponderation":180},"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":90,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"58.0","ponderation":60,"moyenne":"55.2"},"0":"","1":"","2":"","3":"","4":"","5":{"note":58,"moyenne":"55.2","ecartType":"4.2","ponderation":60},"6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":90,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"111.0","ponderation":120,"moyenne":"106.6"},"0":"","1":"","2":"","3":"","4":"","5":"","6":{"note":51,"moyenne":"51.0","ecartType":"7.8","ponderation":60},"7":{"note":60,"moyenne":"55.6","ecartType":"4.6","ponderation":60},"8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"253.1","ponderation":310,"moyenne":"217.2"},"0":"","1":"","2":"","3":"","4":"","5":{"note":110,"moyenne":"80.3","ecartType":"17.2","ponderation":110},"6":{"note":70.79,"moyenne":"75.5","ecartType":"14.5","ponderation":100},"7":{"note":72.27,"moyenne":"61.4","ecartType":"13.7","ponderation":100},"8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":180,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":63,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"116.4","ponderation":120,"moyenne":"104.3"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":{"note":116.4,"moyenne":"104.3","ecartType":"11.2","ponderation":120}},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"184.8","ponderation":210,"moyenne":"139.4"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":{"note":184.8,"moyenne":"139.4","ecartType":"25.3","ponderation":210}},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"52.0","ponderation":90,"moyenne":"61.5"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":{"note":52,"moyenne":"47.1","ecartType":"12.4","ponderation":60},"10":{"note":0,"moyenne":"14.4","ecartType":"10.1","ponderation":30},"11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"215.0","ponderation":240,"moyenne":"179.8"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":{"note":135,"moyenne":"124.1","ecartType":"21.7","ponderation":160},"10":{"note":80,"moyenne":"55.7","ecartType":"13.5","ponderation":80},"11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":72,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"74.5","ponderation":80,"moyenne":"72.8"},"0":"","1":{"note":36.5,"moyenne":"34.8","ecartType":"1.6","ponderation":40},"2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":{"note":38,"moyenne":"37.9","ecartType":"1.3","ponderation":40},"12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"197.5","ponderation":240,"moyenne":"139.9"},"0":"","1":{"note":118,"moyenne":"87.6","ecartType":"26.5","ponderation":120},"2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":{"note":79.5,"moyenne":"53.3","ecartType":"23.9","ponderation":120},"12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":15,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":45,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"94.0","ponderation":105,"moyenne":"70.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":{"note":94,"moyenne":"70.0","ecartType":"16.0","ponderation":105},"9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":180,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":135,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":90,"moyenne":"0.0"},"0":"","1":"","2":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"3":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"4":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":140,"moyenne":"0.0"},"0":"","1":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":410,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"6":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"7":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"8":"","9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":135,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"9":"","10":"","11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":270,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"10":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"11":"","12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":140,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0},"12":""},{"controle":"","ie":"Individuel ou \u00c9quipe","tee":{"note":"0.0","ponderation":270,"moyenne":"0.0"},"0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":{"note":"--","moyenne":0,"ecartType":0,"ponderation":0}},{"controle":"","ie":"","tee":"","0":{"note":515.55,"moyenne":"482.6","ecartType":"","ponderation":600},"1":{"note":154.5,"moyenne":"229.6","ecartType":"","ponderation":300},"2":{"note":0,"moyenne":"0.0","ecartType":"","ponderation":300},"3":{"note":0,"moyenne":"0.0","ecartType":"","ponderation":300},"4":{"note":0,"moyenne":"0.0","ecartType":"","ponderation":300},"5":{"note":168,"moyenne":"238.8","ecartType":"","ponderation":300},"6":{"note":121.79,"moyenne":"237.1","ecartType":"","ponderation":300},"7":{"note":132.26999,"moyenne":"219.3","ecartType":"","ponderation":300},"8":{"note":94,"moyenne":"200.0","ecartType":"","ponderation":300},"9":{"note":187,"moyenne":"311.3","ecartType":"","ponderation":400},"10":{"note":80,"moyenne":"127.4","ecartType":"","ponderation":200},"11":{"note":117.5,"moyenne":"170.9","ecartType":"","ponderation":300},"12":{"note":301.2,"moyenne":"443.1","ecartType":"","ponderation":600},"13":{"note":515.55,"moyenne":"482.6","ecartType":"","ponderation":600},"14":{"note":154.5,"moyenne":"229.6","ecartType":"","ponderation":300},"15":{"note":0,"moyenne":"0.0","ecartType":"","ponderation":900},"16":{"note":168,"moyenne":"238.8","ecartType":"","ponderation":300},"17":{"note":254.06,"moyenne":"456.4","ecartType":"","ponderation":600},"18":{"note":94,"moyenne":"200.0","ecartType":"","ponderation":300},"19":{"note":267,"moyenne":"438.7","ecartType":"","ponderation":600},"20":{"note":117.5,"moyenne":"170.9","ecartType":"","ponderation":300},"21":{"note":301.2,"moyenne":"443.1","ecartType":"","ponderation":600}}];	
+        dojo.addOnLoad(function() {	
+               //dojo.style(dojo.byId("Loader"),"display","true");
+            document.getElementById("Loader").style.visibility= 'visible';
+    
+            dataGrille = new Object();
+            dataGrille.items = new Array();
+            dataGrille.items = data;
+            dataToolTipArray = new Array();
+            var jsonStore = new dojo.data.ItemFileReadStore({data: dataGrille});
+            //console.log(jsonStore);
+    
+                    window["grid"] = dijit.byId("grid");
+            
+            showTooltip = function(e) {
+                rangee = e.rowIndex - firstRangeeNote;
+                colonne = e.cellIndex - firstColNote;
+                
+                console.log(e.rowIndex," ",e.cellIndex);
+                console.log("rangee:"+rangee+" colonne:"+colonne);
+    // 		    alert("moyenne:"+dataToolTip[rangee][colonne]["moyenne"]);
+                var msg;
+                if (e.rowIndex == (nbControle+1)) { /* derniere rangee +1 est la rangee des totaux des colonnes */
+                    if ((rangee >= firstRangeeNote) && (colonne < (nbColonneCompetence+nbColonneAp)) && (colonne >= 0)) {
+                        if (!isNaN(parseFloat(dataGrille.items[rangee][colonne]))) {
+                               if((dataGrille.items[rangee][colonne]!="0")&&(dataGrille.items[rangee][colonne]!="--")){ 
+                                                               msg = "<table class=\"tooltipTable\"><tr><td>Note</td><td>Moyenne</td></tr>";
+                                msg += "<tr><td>"+dataToolTip[rangee][colonne]["note"]+"\/"+dataToolTip[rangee][colonne]["ponderation"]+"</td>";
+                                msg += "<td>"+dataToolTip[rangee][colonne]["moyenne"]+"</td>";
+                                msg += "</tr></table>";
+                                dijit.showTooltip(msg, e.cellNode);
+                                console.log(msg);
+                            }
+                        }
+                    }
+                } else if (rangee != -1) { /* rangee -1 est l'entete */
+                    if (colonne == -2) {  /* colonne -2 (e.cellIndex =1) est ie */
+                        if (dataGrille.items[rangee]['ie']=="I"){
+                            msg = 'Individuel';
+                        } else msg = 'Equipe';
+                        dijit.showTooltip(msg, e.cellNode);
+                    }
+                    else if (colonne == -1) {  /* colonne -1 (e.cellIndex =2) est tee */
+                        if (dataGrille.items[rangee]['tee']!="--"){ 
+                            msg = "<table class=\"tooltipTable\"><tr><td>Note</td><td>Moyenne</td></tr>";
+                            msg += "<tr><td>"+dataToolTip[rangee]['tee']["note"]+"\/"+dataToolTip[rangee]['tee']["ponderation"]+"</td>";
+                            msg += "<td>"+dataToolTip[rangee]['tee']["moyenne"]+"</td>";
+                            msg += "</tr></table>";
+                            dijit.showTooltip(msg, e.cellNode);
+                        }
+                    } 
+                    else if ((rangee >= firstRangeeNote) && (colonne < nbColonneCompetence) && (colonne >= 0)) {
+                        if (!isNaN(parseFloat(dataGrille.items[rangee][colonne]))) {
+                               if((dataGrille.items[rangee][colonne]!="0")&&(dataGrille.items[rangee][colonne]!="--")){ 
+                                                               msg = "<table class=\"tooltipTable\"><tr><td>Note</td><td>Moyenne</td><td>Écart type</td></tr>";
+                                msg += "<tr><td>"+dataToolTip[rangee][colonne]["note"]+"\/"+dataToolTip[rangee][colonne]["ponderation"]+"</td>";
+                                msg += "<td>"+dataToolTip[rangee][colonne]["moyenne"]+"</td>";
+                                msg += "<td>"+dataToolTip[rangee][colonne]["ecartType"]+"</td></tr></table>";
+                                dijit.showTooltip(msg, e.cellNode);
+                            }
+                        }
+                    }
+                }
+            },
+            hideTooltip = function(e) {
+                dijit.hideTooltip(e.cellNode);
+    // 	        dijit._masterTT._onDeck=null;
+            }
+            
+    //////////////////////////////////////////	
+            formatNote = function(inDatum,inRowIndex,inFieldIndex){
+                //console.log(inDatum,inRowIndex,inFieldIndex);
+                if (inDatum == "--")		return "--";
+                else if (inDatum == "0.0")	return "0";
+                else if ((inDatum == "") || (inDatum == " ") || (!inDatum))	return "&nbsp;";
+                else if (!isNaN(inDatum)) 	return inDatum;
+                else return "<font color=\"red\">Err</font>";
+            }
+        
+            function onBeforeRow(inDataIndex, Row) {
+                // note that header row inDataIndex == -1
+    
+                Row[1].hidden = ((inDataIndex != -1)&&(inDataIndex != (nbControle+1)));
+            //	Row[1].hidden = false;
+            }
+    
+            var layout = { onBeforeRow: onBeforeRow,
+            cells: [[
+                { field: "controle", width: 15, name: "Type d'évaluation", styles: 'text-align: left; border-style: solid;', rowSpan: 2	},
+                { field: "ie", width: 2, name: 'I-E', styles: 'text-align: center; border-style: solid;', rowSpan: 2 },
+                { field: "tee", width: 3, name: 'TÉ', styles: 'text-align: right; border-style: solid;', rowSpan: 2 },
+                 {	field: "0", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "1", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "2", name: "1", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "3", name: "2", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; '
+                             } , {	field: "4", name: "3", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; '
+                             } , {	field: "5", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "6", name: "1", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "7", name: "2", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; '
+                             } , {	field: "8", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "9", name: "1", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "10", name: "2", formatter: formatNote,
+                            width: 2.5, styles: 'text-align: center; border-style: solid; '
+                             } , {	field: "11", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } , {	field: "12", name: "1", formatter: formatNote,
+                            width: 3.5, styles: 'text-align: center; border-style: solid; border-left-color: #355C8B;'
+                             } 		],[ 
+                { field: "13", name: 'GEN600' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "14", name: 'GEN650' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "15", name: 'GIF600' , colSpan:3,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "16", name: 'GIF611' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "17", name: 'GIF620' , colSpan:2,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "18", name: 'GIF630' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "19", name: 'GIF650' , colSpan:2,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "20", name: 'GIF655' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } ,{ field: "21", name: 'GIF660' ,
+                        styles: 'text-align: center; border-left-color: #355C8B; border-style: solid; height:1px;'
+                    } 		]]};
+    
+            var grid = new dojox.grid.DataGrid({
+                autoWidth: "true",
+                autoHeight: "true",
+                id: 'grid',
+                store: jsonStore,
+                structure: layout,
+                selectionMode: 'None',
+                onHeaderCellClick: function(){},
+                onMouseOver :   showTooltip,
+                onMouseOut  :   hideTooltip
+            }, document.createElement('div'));
+            
+            dojo.byId("gridContainer4").appendChild(grid.domNode);
+            grid.startup();
+     
+               //dojo.style(dojo.byId("Loader"),"display","none");
+            document.getElementById("Loader").style.visibility= 'hidden';
+    
+        });
+        
+    </script>
+    <h2>Notes de 
+    William Scullion</h2>
+    <h3>Trimestre  
+    été 2018</h3>
+    <div id="gridContainer4"  styles: 'border: 1px solid #355C8B;'></div>
+    <div id="Loader">
+    <br>Veuillez patienter ...
+    </div>
+    
+    </body>
+    
+    </html>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" >
+    
+    
+    <p>Légende:<br>
+    &nbsp; I-E: Type d'évaluation; I=Individuel, E=en Équipe, P=par les Pairs<br>
+    &nbsp; TÉ: Total de l'évaluation</p>
+    <p>Cette page est optimisée pour Firefox 3.0 et Safari 3.0. Avec Internet Explorer il 
+    existe un problème connu. Il n'affiche pas la ligne contenant le nom des activités 
+    pédagogiques.</p>
+    
+    </body>
+    
+    </html>
+    
+    
+    
