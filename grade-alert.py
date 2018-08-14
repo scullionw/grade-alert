@@ -43,6 +43,7 @@ def notify(message):
 
 
 def main():
+    print("Running..")
     URL = "http://www.gel.usherbrooke.ca/s6i/e18/doc/evaluations/notesEtu.php"
     # URL = "http://localhost:5000"
     session = login_session(credentials['username'], credentials['password'])
@@ -63,6 +64,7 @@ def main():
     with Path('old_grades').open(mode='wb') as f:
         pickle.dump(new_grades, f)
     
+    print("Done..")
 
 if __name__ == '__main__':
     sys.exit(main())
