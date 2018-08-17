@@ -5,7 +5,9 @@
 
 1) Get Nimrod messenger API key -> https://m.me/251459615313202
 
-2) Modify config.py.example to contain UdeS user and password and the api key. Rename to config.py
+2) Modify config.py.example to contain UdeS user and password and the api key.
+
+3) Rename to config.py
 
 ## With Docker
 
