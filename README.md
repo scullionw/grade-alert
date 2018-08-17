@@ -17,7 +17,7 @@
 
 2) Set-up cronjob to run script every 30 minutes:
 
-        $ cronjob -e
+        $ crontab -e
 
 3) Add this line to the cronjobs, **where** *REPO* **is the full path to cd into the grade-alert directory**:
 
@@ -37,7 +37,7 @@
 
 4) Open cronjob editor:
 
-        cronjob -e
+        $ crontab -e
 
 5) Add this line to the cronjobs, **where** *REPO* **is the full path to cd into the grade-alert directory**:
 
